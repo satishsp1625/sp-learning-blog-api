@@ -3,6 +3,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const ArticleRoute=require("./routes/article");
 
 //object creations
 const app = express();
@@ -22,6 +23,9 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }).then(() => {
 app.get("/", (req, res) => {
     res.send("API is running Successfully");
 })
+
+//article endpoint
+app.use("/api/article",ArticleRoute);
 
 //Enable Port
 const PORT = process.env.PORT || 1212
