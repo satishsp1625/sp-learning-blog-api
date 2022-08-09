@@ -25,9 +25,24 @@ router.get("/", async (req, res) => {
 })
 
 //Get article by ID
-router.get("/:articleId",async (req, res) => {
+router.get("/:articleId", async (req, res) => {
     const article = await Article.findById(req.params.articleId)
     res.send(article);
 })
 
-module.exports=router
+//Delete by ID
+router.delete("/:articleId", async (req, res) => {
+    const article = await Article.findByIdAndDelete(req.params.articleId, { new: true });
+    res.send(article);
+})
+
+//Update by ID
+router.put("/:articleId", async (req, res) => {
+    const article = await Article.findByIdAndUpdate(req.params.articleId, {
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category
+    }, { new: true });
+    res.send(article);
+})
+module.exports = router
