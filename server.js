@@ -2,13 +2,15 @@
 //Namespace import or package for express
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
-const ArticleRoute=require("./routes/article");
+const ArticleRoute = require("./routes/article");
 
 //object creations
 const app = express();
 
 //API Configurations
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,7 +27,7 @@ app.get("/", (req, res) => {
 })
 
 //article endpoint
-app.use("/api/article",ArticleRoute);
+app.use("/api/article", ArticleRoute);
 
 //Enable Port
 const PORT = process.env.PORT || 1212
